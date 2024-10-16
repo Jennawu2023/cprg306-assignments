@@ -2,9 +2,9 @@
 
 import Item from "./item";
 import {useState} from "react";
-import items from "./items.json";
 
-export default function ItemList() {
+
+export default function ItemList({items} ) {
   const [sortBy, setSortBy] = useState("name");
   
   const sortedItems = [...items].sort((a, b) => {
@@ -15,8 +15,6 @@ export default function ItemList() {
     }
     return 0;
   });
-
-
 
   
   return (
@@ -33,9 +31,11 @@ export default function ItemList() {
         <button  style={{ backgroundColor: sortBy === "category" ? "blue" : "" }}
           onClick={() => setSortBy("category")}
           className = "bg-blue-300 p-1 m-2 w-28 text-white mb-5">Category</button>
+        
+        
       <ul>
         {sortedItems.map(item => (
-          <Item key={item.id} name={item.name} category={item.category} />
+          <Item key={item.id} name={item.name} category={item.category} quantity={item.quantity}/>
         ))}
       </ul>
       </div>
